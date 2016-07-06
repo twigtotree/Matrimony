@@ -1,0 +1,29 @@
+Soumya:BassuMama sgoud1$ keytool -exportcert -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore
+Enter keystore password:  
+Alias name: androiddebugkey
+Creation date: Jan 22, 2014
+Entry type: PrivateKeyEntry
+Certificate chain length: 1
+Certificate[1]:
+Owner: CN=Android Debug, O=Android, C=US
+Issuer: CN=Android Debug, O=Android, C=US
+Serial number: 6fd9cc90
+Valid from: Wed Jan 22 21:00:03 IST 2014 until: Fri Jan 15 21:00:03 IST 2044
+Certificate fingerprints:
+	 MD5:  0E:F8:00:53:58:EC:29:DF:61:2B:09:53:1A:93:CC:07
+	 SHA1: B6:3C:8F:B2:19:B7:5C:8B:B3:FF:8F:E5:54:85:99:16:65:E3:E3:F3
+	 SHA256: 1E:63:62:C8:D4:4E:AB:C8:99:8A:1C:CD:36:AA:84:EB:D5:15:B3:AA:F6:FC:48:C3:BD:CD:9F:7A:23:CC:21:E4
+	 Signature algorithm name: SHA256withRSA
+	 Version: 3
+
+Extensions: 
+
+#1: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: 50 21 71 A8 45 48 DE 8D   CD 67 14 70 1D 7C 90 01  P!q.EH...g.p....
+0010: 07 CF 8F 95                                        ....
+]
+]
+
+Soumya:BassuMama sgoud1$ 

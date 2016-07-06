@@ -16,6 +16,7 @@
 
 package com.twigtotree.lingayatmatrimony.auth;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -80,7 +81,7 @@ public class GoogleSignInActivity extends BaseActivity implements
         // [START config_signin]
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken("708926973954-6e0gt7ti8svhjh4ffd8b9th50a7hb2be.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
         // [END config_signin]
@@ -100,6 +101,7 @@ public class GoogleSignInActivity extends BaseActivity implements
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
+                    startPersonalInfoActivity();
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
@@ -136,11 +138,11 @@ public class GoogleSignInActivity extends BaseActivity implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if (result.isSuccess()) {
+
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
@@ -155,7 +157,7 @@ public class GoogleSignInActivity extends BaseActivity implements
     // [END onactivityresult]
 
     // [START auth_with_google]
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         // [START_EXCLUDE silent]
         showProgressDialog();
@@ -175,12 +177,28 @@ public class GoogleSignInActivity extends BaseActivity implements
                             Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(GoogleSignInActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+
+
+
+
+                        } else {
+                            Log.w(TAG, "signInWithCredential");
+                            //startPersonalInfoActivity();
+                            Toast.makeText(GoogleSignInActivity.this, "Authentication passed.",
+                                    Toast.LENGTH_SHORT).show();
                         }
                         // [START_EXCLUDE]
                         hideProgressDialog();
                         // [END_EXCLUDE]
                     }
                 });
+    }
+
+    private void startPersonalInfoActivity() {
+        Intent intent = new Intent(GoogleSignInActivity.this, PersonalInfoActivity.class);
+        //intent.putExtra("GoogleSignInAccount", acct);
+        startActivity(intent);
+
     }
     // [END auth_with_google]
 
